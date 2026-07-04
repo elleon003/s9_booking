@@ -4,6 +4,8 @@
 **Status:** Approved  
 **Scope:** Authentication, tenancy, row-level isolation, Django admin shell, and Sage Nine Creative branding.  
 
+> **Note:** UI, template location, Tailwind configuration, and `.env` handling decisions in this document are superseded by `docs/superpowers/specs/2026-07-03-tailwind-ui-refactor-design.md`.
+
 This milestone implements the foundation on which all later booking, payment, calendar, and integration features will be built.
 
 ---

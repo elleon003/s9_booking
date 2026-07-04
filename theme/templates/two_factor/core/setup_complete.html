@@ -1,0 +1,17 @@
+{% extends "two_factor/_base_focus.html" %}
+{% load i18n %}
+
+{% block page_title %}{% trans "Enable Two-Factor Authentication" %}{% endblock %}
+
+{% block page_content %}
+  <h1 class="font-serif text-3xl text-deep-sage mb-4">{% trans "Enable Two-Factor Authentication" %}</h1>
+
+  <p class="text-charcoal mb-6">
+    {% blocktrans trimmed %}Congratulations, you've successfully enabled two-factor
+      authentication.{% endblocktrans %}
+  </p>
+
+  <a href="{% url 'two_factor:profile' %}"
+     class="inline-block py-2 px-4 bg-deep-sage text-white rounded hover:opacity-90 transition"
+  >{% trans "Back to Account Security" %}</a>
+{% endblock %}

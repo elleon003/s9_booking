@@ -1,0 +1,33 @@
+{% load i18n %}
+
+<div class="tf-form space-y-4">
+  {{ wizard.management_form }}
+  {% for field in wizard.form.visible_fields %}
+    <div class="flex flex-col">
+      <label for="{{ field.id_for_label }}" class="text-sm font-medium text-charcoal mb-1">
+        {{ field.label }}
+      </label>
+      {{ field }}
+      {% if field.help_text %}
+        <p class="text-xs text-charcoal/70 mt-1">{{ field.help_text }}</p>
+      {% endif %}
+      {% if field.errors %}
+        <ul class="text-sm text-terracotta mt-1">
+          {% for error in field.errors %}
+            <li>{{ error }}</li>
+          {% endfor %}
+        </ul>
+      {% endif %}
+    </div>
+  {% endfor %}
+  {% for field in wizard.form.hidden_fields %}
+    {{ field }}
+  {% endfor %}
+  {% if wizard.form.non_field_errors %}
+    <ul class="text-sm text-terracotta">
+      {% for error in wizard.form.non_field_errors %}
+        <li>{{ error }}</li>
+      {% endfor %}
+    </ul>
+  {% endif %}
+</div>

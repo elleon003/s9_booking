@@ -1,0 +1,61 @@
+{% extends "two_factor/_base_focus.html" %}
+{% load i18n %}
+{% load two_factor_tags %}
+
+{% block page_title %}{% trans "Login" %}{% endblock %}
+
+{% block page_content %}
+  <h1 class="font-serif text-3xl text-deep-sage mb-2">{% trans "Login" %}</h1>
+
+  {% if wizard.steps.current == 'auth' %}
+    <p class="text-charcoal mb-6">{% blocktrans %}Enter your credentials.{% endblocktrans %}</p>
+  {% elif wizard.steps.current == 'token' %}
+    <p class="text-charcoal mb-6">{{ device|as_verbose_action }}</p>
+  {% elif wizard.steps.current == 'backup' %}
+    <p class="text-charcoal mb-6">
+      {% blocktrans trimmed %}Use this form for entering backup tokens for logging in.
+        These tokens have been generated for you to print and keep safe. Please
+        enter one of these backup tokens to login to your account.{% endblocktrans %}
+    </p>
+  {% endif %}
+
+  <form action="" method="post" class="space-y-5">
+    {% block main_form_content %}
+    {% csrf_token %}
+    {% include "two_factor/_wizard_forms.html" %}
+
+    {# hidden submit button to enable [enter] key #}
+    <input type="submit" value="" hidden />
+
+    {% if other_devices %}
+      <div class="space-y-2">
+        <p class="text-charcoal text-sm">{% trans "Or, alternatively, use one of your other authentication methods:" %}</p>
+        {% for other in other_devices %}
+          <button name="challenge_device" value="{{ other.persistent_id }}"
+                  class="w-full py-2 px-4 border border-charcoal rounded hover:bg-pale-cream transition"
+                  type="submit">
+            {{ other|as_action }}
+          </button>
+        {% endfor %}
+      </div>
+    {% endif %}
+
+    {% include "two_factor/_wizard_actions.html" %}
+    {% endblock %}
+  </form>
+
+  {% block 'backup_tokens' %}
+    {% if backup_tokens %}
+      <hr class="my-6 border-pale-cream">
+      <div class="backup_tokens_form">
+        <form action="" method="post" class="space-y-2">
+          {% csrf_token %}
+          <p class="text-charcoal text-sm">{% trans "As a last resort, you can use a backup token:" %}</p>
+          <button name="wizard_goto_step" type="submit" value="backup"
+              class="w-full py-2 px-4 bg-terracotta text-white rounded hover:opacity-90 transition"
+          >{% trans "Use Backup Token" %}</button>
+        </form>
+      </div>
+    {% endif %}
+  {% endblock %}
+{% endblock %}

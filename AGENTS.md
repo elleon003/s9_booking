@@ -11,13 +11,19 @@ High-signal notes for OpenCode sessions working in this repo.
 ## Settings
 
 - Split settings: `config/settings/{base,dev,prod}.py`. `manage.py` hardcodes `DJANGO_SETTINGS_MODULE=config.settings.dev`, so dev runs need no env var. Prod requires `DJANGO_SETTINGS_MODULE=config.settings.prod` plus a full env set (see `prod.py`).
-- Env loading via `environs`: `base.py` calls `env = Env(); env.read_env()`, which auto-discovers `.env` by recursing up from the CWD. A `.env` file at the project root is **required even in dev** — `base.py` reads `SECRET_KEY` with no default before `dev.py`'s default applies. Minimum dev `.env`:
+- Env loading via `environs`: `base.py` calls `env = Env(); env.read_env()`, which auto-discovers `.env` by recursing up from the CWD. A `.env` file at the project root is **required even in dev** — `base.py` reads `SECRET_KEY` with no default before `dev.py`'s default applies. A committed `.env.example` is provided; copy it to `.env` for local development:
+  ```bash
+  cp .env.example .env
+  ```
+  Then override `SECRET_KEY` and any other local values. Do not commit `.env`. Minimum dev `.env`:
   ```
   SECRET_KEY=django-insecure-...
   DEBUG=True
-  ALLOWED_HOSTS=localhost,127.0.0.1,::1
+  ALLOWED_HOSTS=localhost,127.0.0.1,::1,s9booking.local,.s9booking.local
+  BASE_HOST=s9booking.local
+  DEFAULT_FROM_EMAIL=dev@s9booking.local
   ```
-- No `.env.example` exists. If a session reports `EnvError: Environment variable "SECRET_KEY" not set`, create/repair `.env` rather than editing settings.
+- If a session reports `EnvError: Environment variable "SECRET_KEY" not set`, create/repair `.env` (from `.env.example`) rather than editing settings.
 
 ## Verification commands
 

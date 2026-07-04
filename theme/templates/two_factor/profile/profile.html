@@ -1,0 +1,37 @@
+{% extends "two_factor/_base.html" %}
+{% load i18n %}
+
+{% block page_title %}{% trans "Account Security" %}{% endblock %}
+
+{% block page_content %}
+  <h1 class="font-serif text-3xl text-deep-sage mb-4">{% trans "Account Security" %}</h1>
+
+  {% if default_device %}
+    <p class="text-charcoal mb-4">
+      {% trans "Your account is protected by two-factor authentication." %}
+    </p>
+    <p class="text-charcoal mb-6">
+      {% trans "Primary method:" %} <span class="font-medium">{{ default_device_type }}</span>
+    </p>
+
+    {% if backup_tokens %}
+      <p class="text-charcoal mb-6">
+        {% blocktrans with counter=backup_tokens %}{{ counter }} backup tokens remaining.{% endblocktrans %}
+      </p>
+    {% endif %}
+
+    <a href="{% url 'two_factor:backup_tokens' %}"
+       class="inline-block py-2 px-4 bg-deep-sage text-white rounded hover:opacity-90 transition mr-2"
+    >{% trans "Show Codes" %}</a>
+    <a href="{% url 'two_factor:disable' %}"
+       class="inline-block py-2 px-4 border border-charcoal rounded hover:bg-pale-cream transition"
+    >{% trans "Disable Two-Factor Authentication" %}</a>
+  {% else %}
+    <p class="text-charcoal mb-6">
+      {% trans "Two-factor authentication is not enabled for your account. Enable it for additional security." %}
+    </p>
+    <a href="{% url 'two_factor:setup' %}"
+       class="inline-block py-2 px-4 bg-deep-sage text-white rounded hover:opacity-90 transition"
+    >{% trans "Enable Two-Factor Authentication" %}</a>
+  {% endif %}
+{% endblock %}

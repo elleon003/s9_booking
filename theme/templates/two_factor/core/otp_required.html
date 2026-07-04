@@ -1,0 +1,29 @@
+{% extends "two_factor/_base_focus.html" %}
+{% load i18n %}
+
+{% block page_title %}{% trans "Permission Denied" %}{% endblock %}
+
+{% block page_content %}
+  <h1 class="font-serif text-3xl text-deep-sage mb-4">{% trans "Permission Denied" %}</h1>
+
+  <p class="text-charcoal mb-4">
+    {% blocktrans trimmed %}The page you requested, enforces users to verify using
+      two-factor authentication for security reasons. You need to enable these
+      security features in order to access this page.{% endblocktrans %}
+  </p>
+
+  <p class="text-charcoal mb-6">
+    {% blocktrans trimmed %}Two-factor authentication is not enabled for your
+      account. Enable two-factor authentication for enhanced account
+      security.{% endblocktrans %}
+  </p>
+
+  <div class="flex gap-3">
+    <a href="javascript:history.go(-1)"
+       class="py-2 px-4 border border-charcoal rounded hover:bg-pale-cream transition"
+    >{% trans "Go back" %}</a>
+    <a href="{% url 'two_factor:setup' %}"
+       class="py-2 px-4 bg-deep-sage text-white rounded hover:opacity-90 transition"
+    >{% trans "Enable Two-Factor Authentication" %}</a>
+  </div>
+{% endblock %}

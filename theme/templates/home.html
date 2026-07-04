@@ -1,0 +1,22 @@
+{% extends "base.html" %}
+
+{% block title %}{% if tenant %}{{ tenant.name }} Booking{% else %}S9 Booking{% endif %}{% endblock %}
+
+{% block content %}
+  <section class="container mx-auto px-6 py-24 text-center">
+    <h1 class="font-serif text-5xl md:text-6xl text-deep-sage mb-6">
+      {% if tenant %}
+        Welcome to {{ tenant.name }}
+      {% else %}
+        Welcome to S9 Booking
+      {% endif %}
+    </h1>
+    <p class="text-xl md:text-2xl max-w-2xl mx-auto leading-relaxed">
+      {% if tenant %}
+        Book your appointment with {{ tenant.name }}.
+      {% else %}
+        Simple, trustworthy scheduling for service businesses and agencies.
+      {% endif %}
+    </p>
+  </section>
+{% endblock %}

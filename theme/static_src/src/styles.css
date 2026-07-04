@@ -8,3 +8,43 @@
   * the scope of this path.
   */
 @source "../../../**/*.{html,py,js}";
+
+@theme {
+  --color-deep-sage: #50665A;
+  --color-charcoal: #333333;
+  --color-terracotta: #CC7755;
+  --color-pale-cream: #F8F8F0;
+
+  --font-sans: 'DM Sans', ui-sans-serif, system-ui, sans-serif;
+  --font-serif: 'Lora', ui-serif, Georgia, serif;
+}
+
+@utility tf-input {
+  @apply w-full px-3 py-2 border border-charcoal/30 rounded-lg focus:border-deep-sage;
+  border-radius: 8px;
+  outline: 1px solid color-mix(in oklab, var(--color-charcoal) 20%, transparent);
+}
+
+@utility tf-input-focus {
+  outline: 2px solid var(--color-deep-sage);
+}
+
+.tf-form input[type="text"],
+.tf-form input[type="email"],
+.tf-form input[type="password"],
+.tf-form input[type="number"],
+.tf-form input[type="tel"],
+.tf-form select,
+.tf-form textarea {
+  @apply tf-input;
+}
+
+.tf-form input[type="text"]:focus,
+.tf-form input[type="email"]:focus,
+.tf-form input[type="password"]:focus,
+.tf-form input[type="number"]:focus,
+.tf-form input[type="tel"]:focus,
+.tf-form select:focus,
+.tf-form textarea:focus {
+  @apply tf-input-focus;
+}

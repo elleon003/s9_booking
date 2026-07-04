@@ -1,5 +1,7 @@
 # Foundation Milestone Implementation Plan
 
+> **Note:** Tasks related to `templates/base.html`, `templates/home.html`, inline CSS, and `.env` setup are superseded by `docs/superpowers/plans/2026-07-03-tailwind-ui-refactor-implementation-plan.md`.
+
 > **For agentic workers:** REQUIRED SUB-SKILL: Use superpowers:subagent-driven-development (recommended) or superpowers:executing-plans to implement this plan task-by-task. Steps use checkbox (`- [ ]`) syntax for tracking.
 
 **Goal:** Build the Foundation milestone: custom auth with roles, multi-tenant models and middleware, 2FA-enforced Django admin for platform admins only, and Sage Nine Creative branding in Unfold.
